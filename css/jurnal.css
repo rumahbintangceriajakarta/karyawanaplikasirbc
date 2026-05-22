@@ -5,13 +5,18 @@
 .jurnal-container {
     max-width: 1200px;
     margin: 0 auto;
+    width: 100%;
 }
 
-/* Header */
+/* ============================================
+   HEADER
+   ============================================ */
+
 .jurnal-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: var(--spacing-md);
     margin-bottom: var(--spacing-lg);
 }
 
@@ -37,15 +42,17 @@
 }
 
 .btn-date-nav {
-    width: 36px;
-    height: 36px;
+    width: 38px;
+    height: 38px;
+    border: none;
     border-radius: var(--border-radius-sm);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--text-secondary);
     background: var(--color-gray-100);
-    transition: all var(--transition-fast);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all .2s ease;
 }
 
 .btn-date-nav:hover {
@@ -56,19 +63,21 @@
 .current-date-display {
     display: flex;
     align-items: center;
-    gap: var(--spacing-sm);
-    padding: 0 var(--spacing);
-    font-weight: 500;
-    color: var(--text-primary);
-    min-width: 140px;
     justify-content: center;
+    gap: var(--spacing-sm);
+    min-width: 180px;
+    font-weight: 600;
+    color: var(--text-primary);
 }
 
 .current-date-display i {
     color: var(--color-primary);
 }
 
-/* Grid Layout */
+/* ============================================
+   GRID
+   ============================================ */
+
 .jurnal-grid {
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -76,56 +85,100 @@
     margin-bottom: var(--spacing-md);
 }
 
-/* Form Card */
-.jurnal-form-card {
+/* ============================================
+   CARDS
+   ============================================ */
+
+.jurnal-form-card,
+.jurnal-summary-card,
+.jurnal-history-card {
     background: var(--bg-secondary);
     border-radius: var(--border-radius-lg);
     box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: all .25s ease;
 }
 
-.jurnal-form-card .card-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.jurnal-form-card:hover,
+.jurnal-summary-card:hover,
+.jurnal-history-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
 }
+
+.card-header {
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing);
+}
+
+/* ============================================
+   STATUS BADGE
+   ============================================ */
 
 .entry-status {
-    padding: var(--spacing-xs) var(--spacing);
-    border-radius: 20px;
+    padding: 6px 12px;
+    border-radius: 50px;
     font-size: var(--font-size-xs);
     font-weight: 600;
 }
 
 .entry-status.filled {
-    background: rgba(16, 185, 129, 0.1);
+    background: rgba(16,185,129,.1);
     color: var(--color-success);
 }
 
 .entry-status.pending {
-    background: rgba(245, 158, 11, 0.1);
+    background: rgba(245,158,11,.1);
     color: var(--color-warning);
 }
 
 .entry-status.empty {
-    background: rgba(148, 163, 184, 0.1);
+    background: rgba(148,163,184,.1);
     color: var(--text-muted);
 }
+
+/* ============================================
+   FORM
+   ============================================ */
 
 .jurnal-form {
     padding: var(--spacing-md);
 }
 
-.jurnal-form textarea {
-    resize: vertical;
-    min-height: 80px;
+.jurnal-form textarea,
+.jurnal-form input,
+.jurnal-form select {
+    width: 100%;
+    padding: var(--spacing-sm);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    transition: all .2s ease;
 }
 
-/* Summary Card */
-.jurnal-summary-card {
-    background: var(--bg-secondary);
-    border-radius: var(--border-radius-lg);
-    box-shadow: var(--shadow);
+.jurnal-form textarea {
+    resize: vertical;
+    min-height: 120px;
+    line-height: 1.6;
 }
+
+.jurnal-form textarea:focus,
+.jurnal-form input:focus,
+.jurnal-form select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(59,130,246,.15);
+}
+
+/* ============================================
+   SUMMARY
+   ============================================ */
 
 .summary-stats {
     padding: var(--spacing-md);
@@ -141,11 +194,17 @@
     padding: var(--spacing);
     background: var(--color-gray-50);
     border-radius: var(--border-radius);
+    transition: all .2s ease;
+}
+
+.summary-item:hover {
+    transform: translateX(3px);
 }
 
 .summary-icon {
-    width: 48px;
-    height: 48px;
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
     border-radius: var(--border-radius);
     display: flex;
     align-items: center;
@@ -154,17 +213,17 @@
 }
 
 .summary-icon.filled {
-    background: rgba(16, 185, 129, 0.1);
+    background: rgba(16,185,129,.1);
     color: var(--color-success);
 }
 
 .summary-icon.pending {
-    background: rgba(245, 158, 11, 0.1);
+    background: rgba(245,158,11,.1);
     color: var(--color-warning);
 }
 
 .summary-icon.streak {
-    background: rgba(239, 68, 68, 0.1);
+    background: rgba(239,68,68,.1);
     color: var(--color-danger);
 }
 
@@ -180,33 +239,32 @@
 }
 
 .summary-label {
-    font-size: var(--font-size-sm);
     color: var(--text-secondary);
+    font-size: var(--font-size-sm);
 }
 
-/* History Card */
-.jurnal-history-card {
-    background: var(--bg-secondary);
-    border-radius: var(--border-radius-lg);
-    box-shadow: var(--shadow);
-}
+/* ============================================
+   HISTORY
+   ============================================ */
 
 .header-actions {
     display: flex;
     gap: var(--spacing);
+    align-items: center;
 }
 
 .search-input {
-    padding: var(--spacing-xs) var(--spacing);
+    width: 220px;
+    padding: 10px 12px;
     border: 1px solid var(--border-color);
-    border-radius: var(--border-radius-sm);
-    font-size: var(--font-size-sm);
-    width: 200px;
+    border-radius: var(--border-radius);
+    transition: all .2s ease;
 }
 
 .search-input:focus {
     outline: none;
     border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(59,130,246,.15);
 }
 
 .jurnal-list {
@@ -217,47 +275,51 @@
     display: flex;
     align-items: center;
     gap: var(--spacing);
-    padding: var(--spacing-md);
-    border-bottom: 1px solid var(--border-color);
-    transition: background-color var(--transition-fast);
+    padding: var(--spacing);
+    border-radius: var(--border-radius);
+    transition: all .2s ease;
 }
 
-.jurnal-item:last-child {
-    border-bottom: none;
+.jurnal-item:not(:last-child) {
+    border-bottom: 1px solid var(--border-color);
 }
 
 .jurnal-item:hover {
     background: var(--color-gray-50);
-    border-radius: var(--border-radius);
 }
 
 .jurnal-item-header {
     display: flex;
     align-items: center;
     gap: var(--spacing);
-    min-width: 80px;
+    min-width: 90px;
 }
 
 .jurnal-date {
+    width: 52px;
+    height: 52px;
+    border-radius: var(--border-radius);
+    background: linear-gradient(
+        135deg,
+        var(--color-primary),
+        var(--color-primary-dark)
+    );
+    color: white;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    width: 50px;
-    height: 50px;
-    background: var(--color-primary-gradient);
-    border-radius: var(--border-radius);
-    color: var(--color-white);
+    align-items: center;
+    flex-shrink: 0;
 }
 
 .date-day {
-    font-size: var(--font-size-lg);
+    font-size: 1rem;
     font-weight: 700;
     line-height: 1;
 }
 
 .date-month {
-    font-size: var(--font-size-xs);
+    font-size: .7rem;
     text-transform: uppercase;
 }
 
@@ -267,17 +329,17 @@
 }
 
 .jurnal-day {
-    font-weight: 500;
-    font-size: var(--font-size-sm);
+    font-size: .875rem;
+    font-weight: 600;
     color: var(--text-primary);
 }
 
 .jurnal-time {
-    font-size: var(--font-size-xs);
-    color: var(--text-muted);
     display: flex;
     align-items: center;
-    gap: var(--spacing-sm);
+    gap: 4px;
+    color: var(--text-muted);
+    font-size: .75rem;
 }
 
 .photo-badge {
@@ -290,131 +352,138 @@
 }
 
 .jurnal-preview {
-    font-size: var(--font-size-sm);
     color: var(--text-secondary);
-    white-space: nowrap;
     overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
 }
 
 .jurnal-actions {
     display: flex;
-    gap: var(--spacing-xs);
+    gap: 6px;
 }
 
 .btn-icon-sm {
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 34px;
+    border: none;
     border-radius: var(--border-radius-sm);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--text-muted);
     background: var(--color-gray-100);
-    transition: all var(--transition-fast);
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all .2s ease;
 }
 
 .btn-icon-sm:hover {
     background: var(--color-primary);
-    color: var(--color-white);
+    color: white;
 }
-
-/* Responsive */
-@media (max-width: 992px) {
-    .jurnal-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .jurnal-header {
-        flex-direction: column;
-        gap: var(--spacing-md);
-        align-items: flex-start;
-    }
-}
-
-@media (max-width: 576px) {
-    .jurnal-date-selector {
-        width: 100%;
-        justify-content: center;
-    }
-    
-    .jurnal-item {
-        flex-wrap: wrap;
-    }
-    
-    .jurnal-content {
-        width: 100%;
-        order: 3;
-        margin-top: var(--spacing-sm);
-    }
-    
-    .header-actions {
-        flex-wrap: wrap;
-        width: 100%;
-    }
-    
-    .search-input {
-        width: 100%;
-    }
-}
-
 
 /* ============================================
-   JURNAL DETAIL MODAL & PHOTO
+   DETAIL MODAL
    ============================================ */
 
 .jurnal-detail-modal h3 {
     font-size: var(--font-size-lg);
     font-weight: 600;
-    color: var(--text-primary);
     margin-bottom: var(--spacing-md);
     padding-bottom: var(--spacing-sm);
     border-bottom: 1px solid var(--border-color);
 }
 
-.jurnal-detail-modal .detail-section {
+.detail-section {
     margin-bottom: var(--spacing-md);
 }
 
-.jurnal-detail-modal .detail-section label {
+.detail-section label {
     display: block;
-    font-size: var(--font-size-sm);
     font-weight: 600;
     color: var(--text-secondary);
-    margin-bottom: var(--spacing-xs);
+    margin-bottom: 6px;
 }
 
-.jurnal-detail-modal .detail-section p {
-    font-size: var(--font-size-sm);
-    color: var(--text-primary);
-    line-height: 1.6;
-    padding: var(--spacing-sm);
+.detail-section p {
     background: var(--bg-secondary);
+    padding: var(--spacing-sm);
     border-radius: var(--border-radius);
+    line-height: 1.7;
     white-space: pre-wrap;
 }
 
-.jurnal-detail-modal .detail-photo {
-    margin-top: var(--spacing-md);
+.detail-photo {
+    text-align: center;
 }
 
-.jurnal-detail-modal .detail-photo label {
-    display: block;
-    font-size: var(--font-size-sm);
-    font-weight: 600;
-    color: var(--text-secondary);
-    margin-bottom: var(--spacing-sm);
-}
-
-.jurnal-detail-modal .detail-photo img {
+.detail-photo img {
     max-width: 100%;
-    max-height: 300px;
+    max-height: 350px;
+    object-fit: contain;
     border-radius: var(--border-radius);
-    cursor: pointer;
     border: 1px solid var(--border-color);
-    transition: transform var(--transition-fast);
+    cursor: pointer;
+    transition: transform .2s ease;
 }
 
-.jurnal-detail-modal .detail-photo img:hover {
+.detail-photo img:hover {
     transform: scale(1.02);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 992px) {
+
+    .jurnal-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .jurnal-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .header-actions {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .search-input {
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+
+    .jurnal-item {
+        flex-wrap: wrap;
+    }
+
+    .jurnal-item-header {
+        width: 100%;
+    }
+
+    .jurnal-content {
+        width: 100%;
+    }
+
+    .jurnal-actions {
+        margin-left: auto;
+    }
+
+    .current-date-display {
+        min-width: auto;
+        flex: 1;
+    }
+
+    .summary-item {
+        flex-direction: column;
+        text-align: center;
+    }
 }
