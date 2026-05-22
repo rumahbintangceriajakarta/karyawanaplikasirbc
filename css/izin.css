@@ -1,10 +1,18 @@
 /* ============================================
-   PORTAL KARYAWAN - IZIN/SAKIT STYLES
+   PORTAL KARYAWAN - IZIN / SAKIT
+   FIXED & OPTIMIZED VERSION
    ============================================ */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
 
 .izin-container {
     max-width: 1200px;
     margin: 0 auto;
+    width: 100%;
 }
 
 .izin-header {
@@ -22,42 +30,59 @@
     color: var(--text-secondary);
 }
 
+/* ============================================
+   GRID
+   ============================================ */
+
 .izin-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
     gap: var(--spacing-md);
     margin-bottom: var(--spacing-lg);
 }
 
-/* Form Card */
-.izin-form-card {
+/* ============================================
+   CARDS
+   ============================================ */
+
+.izin-form-card,
+.izin-summary-card,
+.izin-history-card {
     background: var(--bg-secondary);
     border-radius: var(--border-radius-lg);
     box-shadow: var(--shadow);
+    overflow: hidden;
 }
 
-.izin-form {
+.izin-form,
+.izin-stats,
+.izin-list {
     padding: var(--spacing-md);
 }
 
-/* File Upload */
+/* ============================================
+   FILE UPLOAD
+   ============================================ */
+
 .file-upload {
     border: 2px dashed var(--border-color);
     border-radius: var(--border-radius);
     padding: var(--spacing-lg);
     text-align: center;
-    transition: all var(--transition-fast);
     cursor: pointer;
+    transition: all 0.25s ease;
+    position: relative;
 }
 
 .file-upload:hover {
     border-color: var(--color-primary);
-    background: rgba(245, 158, 11, 0.05);
+    background-color: rgba(245, 158, 11, 0.05);
 }
 
 .file-upload.dragover {
     border-color: var(--color-primary);
-    background: rgba(245, 158, 11, 0.1);
+    background-color: rgba(245, 158, 11, 0.12);
+    transform: scale(1.01);
 }
 
 .upload-area {
@@ -80,6 +105,10 @@
     color: var(--text-muted);
 }
 
+/* ============================================
+   FILE PREVIEW
+   ============================================ */
+
 .file-preview {
     display: flex;
     align-items: center;
@@ -87,48 +116,50 @@
     padding: var(--spacing);
     background: var(--color-gray-50);
     border-radius: var(--border-radius);
+    margin-top: var(--spacing);
 }
 
 .file-preview i {
     font-size: var(--font-size-xl);
     color: var(--color-primary);
+    flex-shrink: 0;
 }
 
 .file-preview .filename {
     flex: 1;
+    min-width: 0;
     font-size: var(--font-size-sm);
     color: var(--text-primary);
-    white-space: nowrap;
     overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
 }
 
 .btn-remove-file {
-    width: 28px;
-    height: 28px;
+    width: 30px;
+    height: 30px;
+    border: none;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
     color: var(--color-danger);
     background: rgba(239, 68, 68, 0.1);
-    transition: all var(--transition-fast);
+    transition: all 0.2s ease;
+    flex-shrink: 0;
 }
 
 .btn-remove-file:hover {
     background: var(--color-danger);
-    color: var(--color-white);
+    color: #fff;
 }
 
-/* Summary Card */
-.izin-summary-card {
-    background: var(--bg-secondary);
-    border-radius: var(--border-radius-lg);
-    box-shadow: var(--shadow);
-}
+/* ============================================
+   SUMMARY
+   ============================================ */
 
 .izin-stats {
-    padding: var(--spacing-md);
     display: flex;
     flex-direction: column;
     gap: var(--spacing);
@@ -146,52 +177,46 @@
 .izin-stat-item .stat-icon {
     width: 48px;
     height: 48px;
+    flex-shrink: 0;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: var(--font-size);
-    color: var(--color-white);
+    color: #fff;
 }
 
-.izin-stat-item .stat-icon.pending {
+.stat-icon.pending {
     background: var(--color-warning);
 }
 
-.izin-stat-item .stat-icon.approved {
+.stat-icon.approved {
     background: var(--color-success);
 }
 
-.izin-stat-item .stat-icon.rejected {
+.stat-icon.rejected {
     background: var(--color-danger);
 }
 
-.izin-stat-item .stat-content {
-    display: flex;
-    flex-direction: column;
+.stat-content {
+    min-width: 0;
 }
 
-.izin-stat-item .stat-value {
+.stat-value {
+    display: block;
     font-size: var(--font-size-xl);
     font-weight: 700;
     color: var(--text-primary);
 }
 
-.izin-stat-item .stat-label {
+.stat-label {
+    display: block;
     font-size: var(--font-size-sm);
     color: var(--text-secondary);
 }
 
-/* History Card */
-.izin-history-card {
-    background: var(--bg-secondary);
-    border-radius: var(--border-radius-lg);
-    box-shadow: var(--shadow);
-}
-
-.izin-list {
-    padding: var(--spacing-md);
-}
+/* ============================================
+   HISTORY LIST
+   ============================================ */
 
 .izin-item {
     display: flex;
@@ -199,7 +224,7 @@
     gap: var(--spacing);
     padding: var(--spacing-md);
     border-bottom: 1px solid var(--border-color);
-    transition: background-color var(--transition-fast);
+    transition: background-color 0.2s ease;
 }
 
 .izin-item:last-child {
@@ -208,42 +233,47 @@
 
 .izin-item:hover {
     background: var(--color-gray-50);
-    border-radius: var(--border-radius);
 }
 
 .izin-icon {
     width: 48px;
     height: 48px;
+    flex-shrink: 0;
     border-radius: var(--border-radius);
     display: flex;
     align-items: center;
     justify-content: center;
+    color: #fff;
     font-size: var(--font-size-lg);
-    color: var(--color-white);
-    background: var(--color-primary-gradient);
-    flex-shrink: 0;
+    background: linear-gradient(
+        135deg,
+        var(--color-primary),
+        var(--color-primary-dark)
+    );
 }
 
 .izin-icon.sick {
-    background: linear-gradient(135deg, #EF4444 0%, #F87171 100%);
+    background: linear-gradient(135deg, #ef4444, #f87171);
 }
 
 .izin-icon.permission {
-    background: linear-gradient(135deg, #3B82F6 0%, #60A5FA 100%);
+    background: linear-gradient(135deg, #3b82f6, #60a5fa);
 }
 
 .izin-icon.emergency {
-    background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%);
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
 }
 
 .izin-content {
     flex: 1;
+    min-width: 0;
 }
 
 .izin-header-row {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
+    gap: var(--spacing);
     margin-bottom: var(--spacing-xs);
 }
 
@@ -254,8 +284,9 @@
 }
 
 .izin-status {
+    flex-shrink: 0;
     padding: 4px 10px;
-    border-radius: 20px;
+    border-radius: 999px;
     font-size: var(--font-size-xs);
     font-weight: 600;
 }
@@ -294,40 +325,68 @@
 .izin-reason {
     font-size: var(--font-size-sm);
     color: var(--text-muted);
+    line-height: 1.5;
+    word-break: break-word;
 }
 
 .izin-attachment {
     display: inline-flex;
     align-items: center;
-    gap: var(--spacing-xs);
+    gap: 4px;
     margin-top: var(--spacing-xs);
     padding: 4px 8px;
     background: var(--color-gray-100);
     border-radius: var(--border-radius-sm);
     font-size: var(--font-size-xs);
     color: var(--text-secondary);
+    max-width: 100%;
+    overflow: hidden;
 }
 
-/* Responsive */
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
 @media (max-width: 992px) {
     .izin-grid {
         grid-template-columns: 1fr;
     }
 }
 
-@media (max-width: 576px) {
-    .izin-item {
-        flex-wrap: wrap;
+@media (max-width: 768px) {
+    .izin-form,
+    .izin-stats,
+    .izin-list {
+        padding: var(--spacing);
     }
-    
+}
+
+@media (max-width: 576px) {
+
+    .izin-item {
+        gap: 12px;
+    }
+
     .izin-icon {
         width: 40px;
         height: 40px;
-        font-size: var(--font-size);
+        font-size: 1rem;
     }
-    
+
     .izin-header-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .izin-status {
+        align-self: flex-start;
+    }
+
+    .file-preview {
         flex-wrap: wrap;
-        gap: var(--spacing-xs);
+    }
+
+    .btn-remove-file {
+        margin-left: auto;
     }
 }
